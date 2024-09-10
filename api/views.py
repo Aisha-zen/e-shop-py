@@ -67,15 +67,30 @@ class UserDetailsView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ProductListCreateView(generics.ListCreateAPIView):
-    # permission_classes = [IsAuthenticated]
+class ProductListView(generics.ListAPIView):
+    permission_classes = [AllowAny]
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ProductRetrieveView(generics.RetrieveAPIView):
+    permission_classes = [AllowAny]
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+
+class ProductCreateView(generics.CreateAPIView):
     permission_classes = [AllowAny]
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
     def post(self, request, *args, **kwargs):
-        permission_classes = [IsAuthenticated]
 
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -84,7 +99,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
-class ProductRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+class ProductUpdateView(generics.UpdateAPIView):
     permission_classes = [IsAuthenticated]
 
     queryset = Product.objects.all()
@@ -99,15 +114,21 @@ class ProductRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
         self.perform_update(serializer)
         return Response(serializer.data)
 
+
+class ProductDestroyView(generics.DestroyAPIView):
+    permission_classes = [IsAuthenticated]
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
     def destroy(self, request, *args, **kwargs):
 
         instance = self.get_object()
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
 class BulkProductCreateAPI(APIView):
-    permission_classes = []
+    permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         products_data = request.data
