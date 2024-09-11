@@ -1,0 +1,13 @@
+import pandas as pd
+import uuid
+import random
+df_new = pd.read_csv('customer_shopping_data.csv')
+
+# Replace customer_id with uniquely random UIDs
+df_new['product_id'] = [random.randint(1, 60) for _ in range(len(df_new))]
+
+# Save the modified dataframe to a new CSV file
+output_path_new = 'modified_customer_shopping_data_with_uid_new.csv'
+df_new.to_csv(output_path_new, index=False)
+
+output_path_new

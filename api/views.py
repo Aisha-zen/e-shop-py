@@ -7,8 +7,9 @@ from django.contrib.auth import authenticate, login, logout
 from .serializers import UserSerializer, UserDetailsSerializer
 from rest_framework import generics, status
 from .models import Product
+from django.shortcuts import get_object_or_404
 from .serializers import ProductSerializer
-# from .recommender import recommend
+from .recommender import recommend
 
 # Create your views here.
 
@@ -85,7 +86,7 @@ class ProductRetrieveView(generics.RetrieveAPIView):
 
 
 class ProductCreateView(generics.CreateAPIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -143,11 +144,17 @@ class BulkProductCreateAPI(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# class RecommenderView(APIView):
-    # permission_classes = [AllowAny]
+class RecommenderView(APIView):
+    permission_classes = [AllowAny]
 
-    # def get(self, request, pk):
-        # top_n = 9
-        # recommended_products = recommend(pk, top_n)
+    def get(self, request, pk):
+        top_n = 5
+        recommended_products = recommend(pk, top_n)
+        data = []
 
-        # return Response({'Top {top_n} products recommended for customer {pk}':  recommended_products}, status=status.HTTP_200_OK)
+        for id in recommended_products:
+            obj = get_object_or_404(Product, id=id)
+            serializer = ProductSerializer(obj)
+            data.append(serializer.data)
+
+        return Response(data, status=status.HTTP_200_OK)

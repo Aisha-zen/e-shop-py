@@ -34,6 +34,7 @@ class SessionTimeoutMiddleware:
                 print((last_activity))
                 print((current_time - last_activity).total_seconds())
                 if (current_time - last_activity) > timedelta(seconds=settings.SESSION_IDLE_TIMEOUT):
+                    logout(request)
                     header = request.headers.get('Authorization')
                     if header:
                         try:
@@ -42,7 +43,7 @@ class SessionTimeoutMiddleware:
                                 Token.objects.filter(key=token).delete()
                         except ValueError:
                             print("Invalid Authorization header format")
-                    logout(request)
+
             request.session['last_activity'] = time.time()
 
         response = self.get_response(request)
