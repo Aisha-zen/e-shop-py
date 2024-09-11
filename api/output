@@ -1,13 +1,39 @@
 import pandas as pd
-import uuid
-import random
-df_new = pd.read_csv('customer_shopping_data.csv')
+# import uuid
+# import random
+# df_new = pd.read_csv('customer_shopping_data.csv')
 
-# Replace customer_id with uniquely random UIDs
-df_new['product_id'] = [random.randint(1, 60) for _ in range(len(df_new))]
+# # Replace customer_id with uniquely random UIDs
+# df_new['product_id'] = [random.randint(1, 60) for _ in range(len(df_new))]
 
-# Save the modified dataframe to a new CSV file
-output_path_new = 'modified_customer_shopping_data_with_uid_new.csv'
-df_new.to_csv(output_path_new, index=False)
+# # Save the modified dataframe to a new CSV file
+# output_path_new = 'modified_customer_shopping_data_with_uid_new.csv'
+# df_new.to_csv(output_path_new, index=False)
 
-output_path_new
+# output_path_new
+
+
+# Your correct mapping
+correct_categories = {
+    1: "Fashion", 2: "Women", 3: "Men", 4: "Best", 5: "Fashion",
+    6: "Fashion", 7: "Best", 8: "Best", 9: "Electronics", 10: "Fashion",
+    11: "Men", 12: "Men", 13: "Best", 14: "Women", 15: "Women",
+    16: "Women", 17: "Jewelry", 18: "Jewelry", 19: "Jewelry", 20: "Jewelry",
+    21: "Electronics", 22: "Electronics", 23: "Electronics", 24: "Electronics",
+    25: "Top", 26: "Men", 27: "Top", 28: "Top", 29: "Men", 30: "Men",
+    31: "Electronics", 32: "Men", 33: "Women", 34: "Women", 35: "Women",
+    36: "Women", 37: "Jewelry", 38: "Jewelry", 39: "Jewelry", 40: "Jewelry",
+    41: "Fashion", 42: "Fashion", 43: "Fashion", 44: "Fashion", 45: "Best",
+    46: "Best", 47: "Best", 48: "Fashion", 49: "Top", 50: "Top",
+    51: "Men", 52: "Top", 53: "Fashion", 54: "Fashion", 55: "Women",
+    56: "Fashion", 57: "Best", 58: "Top", 59: "Top", 60: "Women"
+}
+
+# Load the CSV file
+df = pd.read_csv('customer_shopping_data.csv')
+
+# Map the correct categories
+df['category'] = df['product_id'].map(correct_categories)
+
+# Save the updated CSV
+df.to_csv('updated_file.csv', index=False)

@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import RegisterView, LoginView, LogoutView, UserDetailsView
 from .views import ProductListView, ProductCreateView, ProductRetrieveView, ProductUpdateView, ProductDestroyView, BulkProductCreateAPI
-from .views import RecommenderView, CategoryView
+from .views import RecommenderView, CategoryView, CategoryRetrieveView
 
 urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
@@ -23,5 +23,7 @@ urlpatterns = [
 
     path('recommend/<str:pk>/', RecommenderView.as_view(), name='recommend'),
     path('categories/', CategoryView.as_view(), name='category-list'),
+    path('category/<int:pk>/', CategoryRetrieveView.as_view(),
+         name='category-single'),
 
 ]

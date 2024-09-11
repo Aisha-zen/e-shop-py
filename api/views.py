@@ -165,3 +165,13 @@ class CategoryView(generics.ListCreateAPIView):
 
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+
+class CategoryRetrieveView(generics.RetrieveAPIView):
+    permission_classes = [AllowAny]
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
