@@ -167,11 +167,12 @@ class CategoryView(generics.ListCreateAPIView):
     serializer_class = CategorySerializer
 
 
-class CategoryRetrieveView(generics.RetrieveAPIView):
+class ProductListByCategory(generics.ListAPIView):
     permission_classes = [AllowAny]
 
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+    serializer_class = ProductSerializer
 
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
+    def get_queryset(self):
+        category_id = self.kwargs['category_id']
+        category = get_object_or_404(Category, id=category_id)
+        return Product.objects.filter(category=category.name)
