@@ -6,14 +6,14 @@ product_id,customer_id,gender,age,category,quantity,price,payment_method,invoice
 37,a5a12a83-e7d4-4da9-bd81-a4e9261ad5f0,Female,53,Books,4,60.6,Cash,24/10/2021,Kanyon
 7,dea03c34-eef0-4057-8c2e-41bbffe73f3a,Female,28,Clothing,5,1500.4,Credit Card,24/05/2022,Forum Istanbul
 33,a9fe1b7d-cac5-4e2a-9a60-0a7561b80897,Female,49,Cosmetics,1,40.66,Cash,13/03/2022,Istinye Park
-6,5b6fed26-2bc7-4b05-bee6-de0ec5591c59,Female,32,Clothing,2,600.16,Credit Card,13/01/2021,Mall of Istanbul
+6,ffb512f8-07c7-43c0-9513-8ca19c621f02,Female,32,Clothing,2,600.16,Credit Card,13/01/2021,Mall of Istanbul
 21,20deb9d8-759d-4e0c-a2f2-d20d2ac061d1,Male,69,Clothing,3,900.24,Credit Card,4/11/2021,Metrocity
 32,7bf566ba-7dc3-411c-9da2-f568f60ef6ba,Female,60,Clothing,2,600.16,Credit Card,22/08/2021,Kanyon
 25,1aa1b5b1-9985-4d2a-9a73-a7ded26bdc85,Female,36,Food & Beverage,2,10.46,Cash,25/12/2022,Metrocity
 11,333fef95-1921-4b3c-ba95-c608cda22e41,Female,29,Books,1,15.15,Credit Card,28/10/2022,Emaar Square Mall
 45,c7764867-da86-4233-aed2-55f89eadc38d,Female,67,Toys,4,143.36,Debit Card,31/07/2022,Metrocity
-52,968bfc76-0da2-4f98-b9ce-8bb8e570f567,Male,25,Clothing,2,600.16,Cash,17/11/2022,Cevahir AVM
-18,7920d43f-cf25-4ab5-8b85-db6dfc931fbb,Female,67,Clothing,2,600.16,Credit Card,3/6/2022,Kanyon
+52,042e9391-f973-4a59-9a0e-09340f881399,Male,30,Clothing,2,600.16,Cash,17/11/2022,Cevahir AVM
+18,bfe76bef-8199-4d3b-a265-4891cf351028,Female,19,Clothing,2,600.16,Credit Card,3/6/2022,Kanyon
 9,cb399fcd-6b35-4770-b61b-ecb4baf0f5dc,Male,24,Shoes,5,3000.85,Credit Card,7/11/2021,Viaport Outlet
 5,1a17eb65-c965-4c2f-a272-fa5e45af002e,Male,65,Books,2,30.3,Debit Card,16/01/2021,Metrocity
 54,b72fdaeb-6adc-441e-9b70-1e5aaf62114b,Female,42,Food & Beverage,3,15.69,Credit Card,5/1/2022,Zorlu Center
