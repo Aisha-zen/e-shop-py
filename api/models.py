@@ -39,10 +39,18 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+    GENDER_CHOICES = (
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+    )
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=200)
     email = models.EmailField(unique=True)
     username = models.CharField(unique=True, max_length=16)
+    age = models.CharField(max_length=4, default=1)
+    gender = models.CharField(
+        max_length=6, choices=GENDER_CHOICES, default='Male')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -78,19 +86,28 @@ class Product(models.Model):
         ordering = ['id']
 
 
-class Orders(models.Model):
-
-    id = models.AutoField(primary_key=True)
-    product = models.ForeignKey('Product', on_delete=models.DO_NOTHING)
-    customer = models.ForeignKey('User', on_delete=models.DO_NOTHING)
-    gender = models.CharField(max_length=10)
-    age = models.IntegerField()
-    category = models.CharField(max_length=50)
-    quantity = models.IntegerField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    payment_method = models.CharField(max_length=20)
-    invoice_date = models.DateField()
-    shopping_mall = models.CharField(max_length=50)
+class Category(models.Model):
+    name = models.CharField(max_length=255, unique=True)
 
     class Meta:
-        ordering = ['id']
+        verbose_name_plural = "Categories"
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+# class Orders(models.Model):
+
+#     id = models.AutoField(primary_key=True)
+#     product = models.ForeignKey('Product', on_delete=models.DO_NOTHING)
+#     customer = models.ForeignKey('User', on_delete=models.DO_NOTHING)
+#     gender = models.CharField(max_length=10)
+#     age = models.IntegerField()
+#     category = models.CharField(max_length=50)
+#     quantity = models.IntegerField()
+#     price = models.DecimalField(max_digits=10, decimal_places=2)
+#     payment_method = models.CharField(max_length=20)
+#     invoice_date = models.DateField()
+#     shopping_mall = models.CharField(max_length=50)
+
+#     class Meta:
+#         ordering = ['id']

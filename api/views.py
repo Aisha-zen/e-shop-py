@@ -6,9 +6,9 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.contrib.auth import authenticate, login, logout
 from .serializers import UserSerializer, UserDetailsSerializer
 from rest_framework import generics, status
-from .models import Product
+from .models import Product, Category
 from django.shortcuts import get_object_or_404
-from .serializers import ProductSerializer
+from .serializers import ProductSerializer, CategorySerializer
 from .recommender import recommend
 
 # Create your views here.
@@ -145,7 +145,7 @@ class BulkProductCreateAPI(APIView):
 
 
 class RecommenderView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, pk):
         top_n = 5
@@ -158,3 +158,10 @@ class RecommenderView(APIView):
             data.append(serializer.data)
 
         return Response(data, status=status.HTTP_200_OK)
+
+
+class CategoryView(generics.ListCreateAPIView):
+    permission_classes = [AllowAny]
+
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
