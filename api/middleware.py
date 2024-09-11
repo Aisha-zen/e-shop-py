@@ -14,15 +14,15 @@ class SessionTimeoutMiddleware:
 
     def __call__(self, request):
 
-        if not request.user.is_authenticated:
-            header = request.headers.get('Authorization')
-            if header:
-                try:
-                    token_type, token = header.split(' ')
-                    if token_type.lower() == 'token':
-                        Token.objects.filter(key=token).delete()
-                except ValueError:
-                    print("Invalid Authorization header format")
+        # if not request.user.is_authenticated:
+        #     header = request.headers.get('Authorization')
+        #     if header:
+        #         try:
+        #             token_type, token = header.split(' ')
+        #             if token_type.lower() == 'token':
+        #                 Token.objects.filter(key=token).delete()
+        #         except ValueError:
+        #             print("Invalid Authorization header format")
 
         if hasattr(request, 'user') and request.user.is_authenticated:
             current_time = datetime.now()
